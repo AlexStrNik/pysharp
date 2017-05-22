@@ -1,4 +1,4 @@
-# pysharp
+# pysharp - v1.0
 C# functions and classes in python.
 
 To install donwload folder
