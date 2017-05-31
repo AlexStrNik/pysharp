@@ -1,4 +1,4 @@
-# pysharp - v1.0
+# pysharp - v1.1
 C# functions and classes in python.
 
 To install donwload folder
@@ -72,3 +72,55 @@ mlist2 = list2([4,6,4,7,8])
 |remove_range(list)|remove every element in list from self|```mlist2.remove_range([4,7,4])```|
 |remove_at(index)|remove element by index from self|```mlist2.remove_at(2)```|
 |first()|returns first element|```mlist2.first()```|
+------------------------------------
+
+        EVENT and EVENTHANDLER
+Event - class that implements support for events and handlers
+
+```python 
+mEvent = Event()
+```
+
+|Name     |Description|Usage|
+--------------|:----------:|--------------|
+|invoke(args,kwargs)|Invoke all subscribed handlers|``` mEvent.invoke('Hello World')```|
+|add_handler(func)|Subscribed new handler|``` mEvent.add_handler(mDef)```|
+|remove_handler(func)|Unsubscribed handler|``` mEvent.remove_handler(mDef)```|
+|remove_all_handlers()|Unsubscribed all handlers|``` mEvent.remove_all_handlers```|
+|handler              |decorator for easy subscribe|```mDef = mEvent.handler(mDef)```|
+
+Example:
+
+```python
+mEvent = Event()
+@mEvent.handler
+def HW(name):
+   print(name)
+mEvent.invoke('John')
+```
+
+EventHandler - class implents handler container. Support subscribe to many events
+
+```python
+mEventHandler = EventHandler(mEvent,mEvent2...)
+```
+
+|Name     |Description|Usage|
+--------------|:----------:|--------------|
+|add_handler(func)|Subscribed new handler|``` mEventHandler.add_handler(mDef)```|
+|remove_handler(func)|Unsubscribed handler|``` mEventHandler.remove_handler(mDef)```|
+|remove_all_handlers()|Unsubscribed all handlers|``` mEventHandler.remove_all_handlers```|
+|unsubscribe_from(event)|Unsubscribe handler_container from event|```mEventHandler.unsubscribe_from(mEvent3)```|
+|subscribe_to(event)|Subscribe handler_container to event|```mEventHandler.subscribe_to(mEvent3)```|
+|handler              |decorator for easy subscribe|```mDef = mEventHandler.handler(mDef)```|
+
+Example:
+
+```python
+mEventHandler = EventHandler(mEvent,mEvent2)
+@mEventHandler.handler
+def HW(name):
+   print(name)
+mEvent.invoke('John')
+mEvent2.invoke('Smit')
+```
